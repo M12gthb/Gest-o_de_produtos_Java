@@ -1,33 +1,34 @@
 package product;
 
 import exceptions.NegativePrice;
+import interfaces.ProductInterface;
 
-public class ProductModel {
+public class ProductModel extends ProductInterface {
 
     private static int nextBarCode = 1;
 
     private String barCode;
     private String name;
-    private int priceInCents;
+    private int price;
     private int stock;
 
     @Override
     public String toString() {
         return String.format(
-                "{ \"Código\": \"%s\", \"Nome\": \"%s\", \"Preço\": %.2f, \"Estoque\": %d }",
+                "{ \"Código\": \"%s\", \"Nome\": \"%s\", \"Preço\": \"R$ %d.00\", \"Estoque\": %d }",
                 barCode,
                 name,
-                priceInCents / 100.0,
+                price,
                 stock);
     }
 
-    public ProductModel(String name, int priceInCents, int stock) throws NegativePrice {
+    public ProductModel(String name, int price, int stock) throws NegativePrice {
         this.barCode = "PROD-" + nextBarCode++;
-        if (priceInCents < 0) {
+        if (price < 0) {
             throw new NegativePrice("O preço do produto precisa ser um número positivo.");
         }
         this.name = name;
-        this.priceInCents = priceInCents;
+        this.price = price;
         this.stock = stock;
     }
 
@@ -39,8 +40,8 @@ public class ProductModel {
         return this.name;
     }
 
-    public int getPriceInCents() {
-        return this.priceInCents;
+    public int getPrice() {
+        return this.price;
     }
 
     public int getStock() {
@@ -51,8 +52,8 @@ public class ProductModel {
         this.name = newName;
     }
 
-    public void setName(int newPriceInCents) {
-        this.priceInCents = newPriceInCents;
+    public void setPrice(int newPriceInCents) {
+        this.price = newPriceInCents;
     }
 
     public void setStock(int newStock) {

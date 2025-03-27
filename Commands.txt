@@ -1,0 +1,4 @@
+Compilação: javac -d bin src/exceptions/*.java src/product/*.java src/interfaces/*.java src/Main.java
+Execução: java -cp bin Main
+
+
